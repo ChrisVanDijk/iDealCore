@@ -1,5 +1,7 @@
 ﻿using iDealCore;
 using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace iDeal
@@ -59,8 +61,15 @@ namespace iDeal
             }
 
             Console.WriteLine(request.IssuerAuthenticationURL);
-            // System.IO.File.WriteAllText(@"c:\temp\url.txt", request.IssuerAuthenticationURL.Replace("&amp;", "&"));
-            Console.WriteLine("Please goto above url and after payment etc. press any key");
+
+            try
+            {
+                OpenBrowser(request.IssuerAuthenticationURL.Replace("&amp;", "&"));
+            }
+            catch
+            {
+                Console.WriteLine("Please goto above url and after payment etc. press any key");
+            }
 
             Console.ReadKey();
 
@@ -89,6 +98,26 @@ namespace iDeal
             Console.WriteLine(status.Amount);
 
             Console.ReadKey();
+        }
+
+        // https://github.com/dotnet/corefx/issues/10361
+        public static void OpenBrowser(string url)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                //Process.Start(new ProcessStartInfo("cmd", $"/c start {url}"));
+                url = url.Replace("&", "^&");
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url);
+            }
+
         }
     }
 }
