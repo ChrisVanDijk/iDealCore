@@ -1,11 +1,15 @@
-﻿using iDealCore;
-using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-namespace iDeal
+namespace IDeal
 {
+    using System;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
+    using System.Security.Cryptography.X509Certificates;
+    using IDealCore;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -48,7 +52,7 @@ namespace iDeal
             tranactionLib.Amount = 2.95M;
             tranactionLib.Description = "Test Order";
             tranactionLib.EntranceCode = Guid.NewGuid().ToString();
-            tranactionLib.OrderId = "12332365";
+            tranactionLib.PurchaseId = "12332365";
 
             var request = tranactionLib.Request(issuerResult.Issuers[0].IssuerId).Result;
 
@@ -105,7 +109,7 @@ namespace iDeal
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                //Process.Start(new ProcessStartInfo("cmd", $"/c start {url}"));
+                // Process.Start(new ProcessStartInfo("cmd", $"/c start {url}"));
                 url = url.Replace("&", "^&");
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
             }
@@ -117,7 +121,6 @@ namespace iDeal
             {
                 Process.Start("open", url);
             }
-
         }
     }
 }
