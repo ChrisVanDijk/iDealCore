@@ -5,11 +5,11 @@
     <AssemblyName>iDealCore</AssemblyName>
     <PackageId>iDealCore</PackageId>
 
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>Chris van Dijk</Authors>
     <Description>iDEAL Professional for .NET Core</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageReleaseNotes>Add documentation</PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) CVD Software. All rights reserved.</Copyright>
     <PackageTags>ideal</PackageTags>
 
@@ -18,10 +18,15 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard1.6\iDealCore.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.6\iDealCore.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
